@@ -1,0 +1,96 @@
+<div class="container top100">
+    <div class="row oneline">
+     
+      <div class="text-right">
+          <button type="button" class="btn btn-outline-danger marginR13 marginB13" (click)="deleteSelected()">Delete</button>
+          <button type="submit" class="btn btn-outline-primary marginR13 marginB13" (click)="createNewRecord()">Add Record</button>
+           <div class="inlineBlock marginB13"> <input type="text" [(ngModel)]="searchText" class="form-control" id="search" placeholder="Search Here">
+           </div>   </div> </div>
+  <div>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th> <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();"/></th>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>superheroName</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of allStudents; let i = index">
+            <td>
+                <input type="checkbox"  [(ngModel)]="student.selected" (change)="checkIfAllSelected();"/>
+              </td>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ student.firstName }}</td>
+          <td>{{ student.lastName }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.superheroName }}</td>
+          <td>{{ student.gender }}</td>
+          <td>{{ student.age }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+  <br>
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}"> <div class="modal-dialog">
+      <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title ">New Student Information</h5>
+          
+          <button type="button" class="close" (click)="closeModel()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                  <label for="firstname-input" class="col-2 col-form-label">First Name</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="newStudent.firstName" name="firstName" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="lastname-input" class="col-2 col-form-label">Last Name</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="newStudent.lastName" name="lastName" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="lastname-input" class="col-2 col-form-label">Superhero Name</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="newStudent.superheroName" name="superheroName" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                  <div class="col-10">
+                    <input class="form-control" type="email" [(ngModel)]="newStudent.email" name="email" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="city-input" class="col-2 col-form-label">Gender</label>
+                  <select name="gender" [(ngModel)]="newStudent.gender">
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                  <label for="example-password-input" class="col-2 col-form-label">Age</label>
+                  <div class="col-10">
+                    <input class="form-control" type="number" [(ngModel)]="newStudent.age" name="age" required>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success marginR13" (click)="addRecord()">Add</button>
+                <button type="submit" class="btn btn-primary marginR13" (click)="closeModel()">Cancel</button>
+              </form>
+        </div>
+      </div>
+    </div></div>
+</div>
